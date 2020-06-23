@@ -1,0 +1,11 @@
+language: generic 
+sudo: required
+services:
+  - docker
+
+
+before_install:
+  - docker build -t kjarisk/docker-frontreact -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true kjarisk/docker-frontreact npm run test -- --coverage
