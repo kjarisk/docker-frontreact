@@ -9,3 +9,16 @@ before_install:
 
 script:
   - docker run -e CI=true kjarisk/docker-frontreact npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker-frontreact"
+  env: "DockerFrontreact-env"
+  bucket_name: "elasticbeanstalk-us-west-2-190343677142"
+  bucket_path: "docker-frontreact"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_acces_key:
+      secure: "$AWS_SECRET_KEY"
